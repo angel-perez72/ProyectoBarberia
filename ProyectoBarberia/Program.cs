@@ -33,21 +33,43 @@ do
 
             Cliente nuevoCliente = new Cliente();
 
+            Console.WriteLine("\tREGISTRANDO CLIENTE ");
+            Console.WriteLine();
             Console.WriteLine("Datos del Cliente: ");
             Console.WriteLine();
+
             Console.Write("Id: ");
             nuevoCliente.Id = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Nombre: ");
-            nuevoCliente.Nombre = Console.ReadLine();
+            bool existeCliente = false;
 
-            Console.Write("Telefono: ");
-            nuevoCliente.Telefono = Console.ReadLine();
+            foreach (Cliente cliente in clientes)
+            {
+                if (cliente.Id == nuevoCliente.Id)
+                {
+                    existeCliente = true;
+                }
+            }
 
-            clientes.Add(nuevoCliente);
-            Console.WriteLine();
-            Console.WriteLine("\tCLIENTE REGISTRADO!");
+            if (existeCliente == true)
+            {
+                Console.WriteLine();
+                Console.WriteLine("\tYA EXISTE UN CLIENTE CON ESTE ID!");
+            }
+            else
+            {
+                Console.Write("Nombre: ");
+                nuevoCliente.Nombre = Console.ReadLine();
+
+                Console.Write("Telefono: ");
+                nuevoCliente.Telefono = Console.ReadLine();
+
+                clientes.Add(nuevoCliente);
+                Console.WriteLine();
+                Console.WriteLine("\tCLIENTE REGISTRADO!");
+            }
             break;
+
 
         case 2:
             Console.WriteLine("Gestion de barberos");

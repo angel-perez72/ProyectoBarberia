@@ -1,4 +1,9 @@
-﻿int opcion = 0;
+﻿
+using ProyectoBarberia;
+
+List<Cliente> clientes = new List<Cliente>();
+
+int opcion = 0;
 
 do
 {
@@ -6,7 +11,9 @@ do
 
     Console.WriteLine("EL MEJOR CORTE BARBERSHOP");
     Console.WriteLine();
-    Console.WriteLine("1. Gestionar clientes");
+    Console.WriteLine("\tMENU DE OPCIONES");
+    Console.WriteLine();
+    Console.WriteLine("1. Registrar clientes");
     Console.WriteLine("2. Gestionar barberos");
     Console.WriteLine("3. Gestionar servicios");
     Console.WriteLine("4. Gestionar citas");
@@ -22,7 +29,24 @@ do
     switch (opcion)
     {
         case 1:
-            Console.WriteLine("Gestion de clientes");
+            Console.Clear();
+
+            Cliente nuevoCliente = new Cliente();
+
+            Console.WriteLine("Datos del Cliente: ");
+            Console.WriteLine();
+            Console.Write("Id: ");
+            nuevoCliente.Id = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Nombre: ");
+            nuevoCliente.Nombre = Console.ReadLine();
+
+            Console.Write("Telefono: ");
+            nuevoCliente.Telefono = Console.ReadLine();
+
+            clientes.Add(nuevoCliente);
+            Console.WriteLine();
+            Console.WriteLine("\tCLIENTE REGISTRADO!");
             break;
 
         case 2:

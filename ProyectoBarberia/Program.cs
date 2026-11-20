@@ -13,12 +13,13 @@ do
     Console.WriteLine("\tMENU DE OPCIONES");
     Console.WriteLine();
     Console.WriteLine("1. Registrar clientes");
-    Console.WriteLine("2. Gestionar barberos");
-    Console.WriteLine("3. Gestionar servicios");
-    Console.WriteLine("4. Gestionar citas");
-    Console.WriteLine("5. Registrar atencion");
-    Console.WriteLine("6. Consultar inventario");
-    Console.WriteLine("7. Ver reportes");
+    Console.WriteLine("2. Ver clientes registrados");
+    Console.WriteLine("3. Gestionar barberos");
+    Console.WriteLine("4. Gestionar servicios");
+    Console.WriteLine("5. Gestionar citas");
+    Console.WriteLine("6. Registrar atencion");
+    Console.WriteLine("7. Consultar inventario");
+    Console.WriteLine("8. Ver reportes");
     Console.WriteLine("0. Salir");
     Console.WriteLine();
     Console.Write("Seleccione una opcion: ");
@@ -113,7 +114,28 @@ do
             break;
 
         case 2:
-            Console.WriteLine("Gestion de barberos");
+            Console.Clear();
+
+            Console.WriteLine("\tCLIENTES REGISTRADOS");
+            Console.WriteLine();
+
+            if (clientes.Count == 0)
+            {
+                Console.WriteLine();
+                Console.WriteLine("\tNO HAY CLIENTES REGISTRADOS!");
+                Console.WriteLine();
+            }
+            else
+            {
+                foreach (Cliente cliente in clientes)
+                {
+                    Console.WriteLine("Id: " + cliente.Id);
+                    Console.WriteLine("Nombre: " + cliente.Nombre);
+                    Console.WriteLine("Telefono: " + cliente.Telefono);
+                    Console.WriteLine("____________________________");
+                    Console.WriteLine();
+                }
+            }
             break;
 
         case 3:

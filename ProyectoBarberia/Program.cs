@@ -1,5 +1,4 @@
-﻿
-using ProyectoBarberia;
+﻿using ProyectoBarberia;
 
 List<Cliente> clientes = new List<Cliente>();
 
@@ -38,9 +37,39 @@ do
             Console.WriteLine("Datos del Cliente: ");
             Console.WriteLine();
 
-            Console.Write("Id: ");
-            nuevoCliente.Id = Convert.ToInt32(Console.ReadLine());
+            //validando el id
+            bool idValido = false;
 
+            do
+            {
+                Console.Write("Id: ");
+                string entradaId = Console.ReadLine();
+                int numeroId = 0;
+
+                if (int.TryParse(entradaId, out numeroId))
+                {
+                    if (numeroId > 0)
+                    {
+                        nuevoCliente.Id = numeroId;
+                        idValido = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("\tEL ID DEBE SER MAYOR A CERO!");
+                        Console.WriteLine();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("\tEL ID DEBE SER UN NUMERO!");
+                    Console.WriteLine();
+                }
+            }
+            while (idValido == false);
+
+            //Que no se repita el id
             bool existeCliente = false;
 
             foreach (Cliente cliente in clientes)
@@ -58,8 +87,21 @@ do
             }
             else
             {
-                Console.Write("Nombre: ");
-                nuevoCliente.Nombre = Console.ReadLine();
+                //validando el nombre
+                do
+                {
+                    Console.Write("Nombre: ");
+                    nuevoCliente.Nombre = Console.ReadLine();
+
+                    if (string.IsNullOrWhiteSpace(nuevoCliente.Nombre))
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("\tEL NOMBRE NO PUEDE ESTAR VACIO!");
+                        Console.WriteLine();
+                    }
+
+                }
+                while (string.IsNullOrWhiteSpace(nuevoCliente.Nombre));
 
                 Console.Write("Telefono: ");
                 nuevoCliente.Telefono = Console.ReadLine();
@@ -69,7 +111,6 @@ do
                 Console.WriteLine("\tCLIENTE REGISTRADO!");
             }
             break;
-
 
         case 2:
             Console.WriteLine("Gestion de barberos");

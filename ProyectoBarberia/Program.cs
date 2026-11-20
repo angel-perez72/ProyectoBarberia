@@ -14,12 +14,13 @@ do
     Console.WriteLine();
     Console.WriteLine("1. Registrar clientes");
     Console.WriteLine("2. Ver clientes registrados");
-    Console.WriteLine("3. Gestionar barberos");
-    Console.WriteLine("4. Gestionar servicios");
-    Console.WriteLine("5. Gestionar citas");
-    Console.WriteLine("6. Registrar atencion");
-    Console.WriteLine("7. Consultar inventario");
-    Console.WriteLine("8. Ver reportes");
+    Console.WriteLine("3. Buscar cliente por Id");
+    Console.WriteLine("4. Gestionar barberos");
+    Console.WriteLine("5. Gestionar servicios");
+    Console.WriteLine("6. Gestionar citas");
+    Console.WriteLine("7. Registrar atencion");
+    Console.WriteLine("8. Consultar inventario");
+    Console.WriteLine("9. Ver reportes");
     Console.WriteLine("0. Salir");
     Console.WriteLine();
     Console.Write("Seleccione una opcion: ");
@@ -139,23 +140,37 @@ do
             break;
 
         case 3:
-            Console.WriteLine("Gestion de servicios");
-            break;
+            Console.Clear();
+            Console.WriteLine("\tBUSCAR CLIENTE");
+            Console.WriteLine();
 
-        case 4:
-            Console.WriteLine("Gestion de citas");
-            break;
+            Console.Write("Ingrese el Id del cliente: ");
+            int idBuscar = Convert.ToInt32(Console.ReadLine());
 
-        case 5:
-            Console.WriteLine("Registrar atencion");
-            break;
+            bool clienteEncontrado = false;
 
-        case 6:
-            Console.WriteLine("Consultar inventario");
-            break;
+            foreach (Cliente cliente in clientes)
+            {
+                if (cliente.Id == idBuscar)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("\tCLIENTE ENCONTRADO!");
+                    Console.WriteLine();
 
-        case 7:
-            Console.WriteLine("Ver reportes");
+                    Console.WriteLine("Id: " + cliente.Id);
+                    Console.WriteLine("Nombre: " + cliente.Nombre);
+                    Console.WriteLine("Telefono: " + cliente.Telefono);
+
+                    clienteEncontrado = true;
+                    break;
+                }
+            }
+
+            if (clienteEncontrado == false)
+            {
+                Console.WriteLine();
+                Console.WriteLine("\tCLIENTE NO ENCONTRADO!");
+            }
             break;
 
         case 0:

@@ -19,6 +19,7 @@ do
     Console.WriteLine("4. Actualizar cliente");
     Console.WriteLine("5. Eliminar cliente");
     Console.WriteLine("6. Registrar barbero");
+    Console.WriteLine("7. Eliminar barbero");
     Console.WriteLine("0. Salir");
     Console.WriteLine();
     Console.Write("Seleccione una opcion: ");
@@ -348,6 +349,55 @@ do
 
                 Console.WriteLine();
                 Console.WriteLine("\tBARBERO REGISTRADO!");
+            }
+
+            break;
+
+        case 7:
+            Console.Clear();
+
+            Console.WriteLine("\tELIMINAR BARBERO");
+            Console.WriteLine();
+
+            Console.Write("Id del barbero a eliminar: ");
+            int idEliminarBarbero = Convert.ToInt32(Console.ReadLine());
+
+            bool barberoEncontrado = false;
+
+            foreach (Barbero barbero in barberos)
+            {
+                if (barbero.Id == idEliminarBarbero)
+                {
+                    barberoEncontrado = true;
+
+                    Console.WriteLine();
+                    Console.WriteLine("Nombre: " + barbero.Nombre);
+                    Console.WriteLine();
+
+                    Console.Write("Eliminar barbero? (S/N): ");
+                    string confirmacionBarbero = Console.ReadLine();
+
+                    if (confirmacionBarbero == "S" || confirmacionBarbero == "s")
+                    {
+                        barberos.Remove(barbero);
+
+                        Console.WriteLine();
+                        Console.WriteLine("\tBARBERO ELIMINADO!");
+                    }
+                    else
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("\tELIMINACION CANCELADA!");
+                    }
+
+                    break;
+                }
+            }
+
+            if (barberoEncontrado == false)
+            {
+                Console.WriteLine();
+                Console.WriteLine("\tBARBERO NO ENCONTRADO!");
             }
 
             break;

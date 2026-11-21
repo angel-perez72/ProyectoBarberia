@@ -27,6 +27,7 @@ do
     Console.WriteLine("10. Cancelar cita");
     Console.WriteLine("11. Registrar servicio realizado");
     Console.WriteLine("12. Calcular comision");
+    Console.WriteLine("13. Reporte de ingresos");
     Console.WriteLine("0. Salir");
     Console.WriteLine();
     Console.Write("Seleccione una opcion: ");
@@ -737,8 +738,33 @@ do
 
             break;
 
+        case 13:
+            Console.Clear();
+
+            Console.WriteLine("\tREPORTE DE INGRESOS");
+            Console.WriteLine();
+
+            if (serviciosRealizados.Count == 0)
+            {
+                Console.WriteLine("NO SE HA RELIZADO NINGUN SERVICIO!");
+                break;
+            }
+
+            decimal totalIngresos = 0;
+
+            foreach (ServicioRealizado servicio in serviciosRealizados)
+            {
+                totalIngresos = totalIngresos + servicio.Monto;
+            }
+
+            Console.WriteLine("Servicios realizados: " + serviciosRealizados.Count);
+            Console.WriteLine("Total de ingresos: RD$" + totalIngresos);
+
+            break;
+
+
         case 0:
-            Console.WriteLine("Saliendo del sistema");
+            Console.WriteLine("Saliendo del sistema...");
             break;
 
         default:

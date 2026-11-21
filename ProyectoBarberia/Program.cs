@@ -2,6 +2,7 @@
 
 List<Cliente> clientes = new List<Cliente>();
 List<Barbero> barberos = new List<Barbero>();
+List<Cita> citas = new List<Cita>();
 
 int opcion = 0;
 
@@ -20,6 +21,7 @@ do
     Console.WriteLine("5. Eliminar cliente");
     Console.WriteLine("6. Registrar barbero");
     Console.WriteLine("7. Eliminar barbero");
+    Console.WriteLine("8. Agendar cita");
     Console.WriteLine("0. Salir");
     Console.WriteLine();
     Console.Write("Seleccione una opcion: ");
@@ -398,6 +400,123 @@ do
             {
                 Console.WriteLine();
                 Console.WriteLine("\tBARBERO NO ENCONTRADO!");
+            }
+
+            break;
+
+        case 8:
+            Console.Clear();
+
+            Console.WriteLine("\tAGENDAR CITA");
+            Console.WriteLine();
+
+            if (clientes.Count == 0 || barberos.Count == 0)
+            {
+                Console.WriteLine("DEBE HABER CLIENTES Y BARBEROS REGISTRADOS!");
+                break;
+            }
+
+            Cita nuevaCita = new Cita();
+
+            Console.Write("Numero(Id) de de la cita: ");
+            nuevaCita.Id = Convert.ToInt32(Console.ReadLine());
+
+            bool citaRepetida = false;
+
+            foreach (Cita cita in citas)
+            {
+                if (cita.Id == nuevaCita.Id)
+                {
+                    citaRepetida = true;
+                    break;
+                }
+            }
+
+            if (citaRepetida == true)
+            {
+                Console.WriteLine("YA EXISTE UNA CITA CON ESTE NUMERO (ID)!");
+                break;
+            }
+
+            Console.Write("Id del cliente: ");
+            nuevaCita.IdCliente = Convert.ToInt32(Console.ReadLine());
+
+            bool clienteValido = false;
+
+            foreach (Cliente cliente in clientes)
+            {
+                if (cliente.Id == nuevaCita.IdCliente)
+                {
+                    clienteValido = true;
+                    break;
+                }
+            }
+
+            if (clienteValido == false)
+            {
+                Console.WriteLine("CLIENTE NO ENCONTRADO!");
+                break;
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("BARBEROS DISPONIBLES:");
+
+            foreach (Barbero barbero in barberos)
+            {
+                Console.WriteLine(barbero.Id + " - " + barbero.Nombre);
+            }
+
+            Console.WriteLine();
+            Console.Write("Id del barbero: ");
+            nuevaCita.IdBarbero = Convert.ToInt32(Console.ReadLine());
+
+            bool barberoValido = false;
+
+            foreach (Barbero barbero in barberos)
+            {
+                if (barbero.Id == nuevaCita.IdBarbero)
+                {
+                    barberoValido = true;
+                    break;
+                }
+            }
+
+            if (barberoValido == false)
+            {
+                Console.WriteLine("BARBERO NO ENCONTRADO!");
+                break;
+            }
+
+            Console.Write("Fecha (dia/mes/anno): ");
+            nuevaCita.Fecha = Console.ReadLine();
+
+            Console.Write("Hora (hora:minutos): ");
+            nuevaCita.Hora = Console.ReadLine();
+
+            bool horarioOcupado = false;
+
+            foreach (Cita cita in citas)
+            {
+                if (cita.IdBarbero == nuevaCita.IdBarbero && cita.Fecha == nuevaCita.Fecha && cita.Hora == nuevaCita.Hora && cita.Estado == "Pendiente")
+                {
+                    horarioOcupado = true;
+                    break;
+                }
+            }
+
+            if (horarioOcupado == true)
+            {
+                Console.WriteLine();
+                Console.WriteLine("EL BARBERO YA TIENE UNA CITA EN ESE HORARIO!");
+            }
+            else
+            {
+                nuevaCita.Estado = "Pendiente";
+
+                citas.Add(nuevaCita);
+
+                Console.WriteLine();
+                Console.WriteLine("\tCITA AGENDADA CORRECTAMENTE!");
             }
 
             break;

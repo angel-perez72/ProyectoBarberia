@@ -15,12 +15,7 @@ do
     Console.WriteLine("1. Registrar clientes");
     Console.WriteLine("2. Ver clientes registrados");
     Console.WriteLine("3. Buscar cliente por Id");
-    Console.WriteLine("4. Gestionar barberos");
-    Console.WriteLine("5. Gestionar servicios");
-    Console.WriteLine("6. Gestionar citas");
-    Console.WriteLine("7. Registrar atencion");
-    Console.WriteLine("8. Consultar inventario");
-    Console.WriteLine("9. Ver reportes");
+    Console.WriteLine("4. Actualizar cliente");
     Console.WriteLine("0. Salir");
     Console.WriteLine();
     Console.Write("Seleccione una opcion: ");
@@ -167,6 +162,63 @@ do
             }
 
             if (clienteEncontrado == false)
+            {
+                Console.WriteLine();
+                Console.WriteLine("\tCLIENTE NO ENCONTRADO!");
+            }
+            break;
+
+        case 4:
+            Console.Clear();
+            Console.WriteLine("\tACTUALIZAR CLIENTE");
+            Console.WriteLine();
+
+            Console.Write("Ingrese el Id del cliente a actualizar: ");
+            int idModificar = Convert.ToInt32(Console.ReadLine());
+
+            bool clienteExiste = false;
+
+            foreach (Cliente cliente in clientes)
+            {
+                if (cliente.Id == idModificar)
+                {
+                    clienteExiste = true;
+
+                    Console.WriteLine();
+                    Console.WriteLine("Nombre actual: " + cliente.Nombre);
+                    Console.WriteLine("Telefono actual: " + cliente.Telefono);
+                    Console.WriteLine();
+
+                    string nuevoNombre = "";
+
+                    do
+                    {
+                        Console.Write("Nuevo nombre: ");
+                        nuevoNombre = Console.ReadLine();
+
+                        if (string.IsNullOrWhiteSpace(nuevoNombre))
+                        {
+                            Console.WriteLine("El nombre no puede estar vacio.");
+                        }
+
+                    } while (string.IsNullOrWhiteSpace(nuevoNombre));
+
+                    string nuevoTelefono = "";
+
+                    Console.Write("Nuevo telefono: ");
+                    nuevoTelefono = Console.ReadLine();
+
+
+                    cliente.Nombre = nuevoNombre;
+                    cliente.Telefono = nuevoTelefono;
+
+                    Console.WriteLine();
+                    Console.WriteLine("\tCLIENTE ACTUALIZADO!");
+
+                    break;
+                }
+            }
+            if (clienteExiste == false)
             {
                 Console.WriteLine();
                 Console.WriteLine("\tCLIENTE NO ENCONTRADO!");

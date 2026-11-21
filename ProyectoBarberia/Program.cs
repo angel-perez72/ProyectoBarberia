@@ -265,15 +265,15 @@ do
 
                         clienteEliminado = true;
                     }
-
-                    if (clienteEliminado == false)
-                    {
-                        Console.WriteLine();
-                        Console.WriteLine("\tCLIENTE NO ENCONTRADO!");
-                    }
-
-                    break;
                 }
+
+                if (clienteEliminado == false)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("\tCLIENTE NO ENCONTRADO!");
+                }
+
+                break;
             }
 
             break;

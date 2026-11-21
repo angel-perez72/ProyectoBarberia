@@ -22,6 +22,7 @@ do
     Console.WriteLine("6. Registrar barbero");
     Console.WriteLine("7. Eliminar barbero");
     Console.WriteLine("8. Agendar cita");
+    Console.WriteLine("9. Consultar citas");
     Console.WriteLine("0. Salir");
     Console.WriteLine();
     Console.Write("Seleccione una opcion: ");
@@ -519,6 +520,51 @@ do
                 Console.WriteLine("\tCITA AGENDADA CORRECTAMENTE!");
             }
 
+            break;
+
+
+        case 9:
+            Console.Clear();
+
+            Console.WriteLine("\tCITAS REGISTRADAS");
+            Console.WriteLine();
+
+            if (citas.Count == 0)
+            {
+                Console.WriteLine("\tNO HAY CITAS REGISTRADAS!");
+            }
+            else
+            {
+                foreach (Cita cita in citas)
+                {
+                    Console.WriteLine("Id de cita: " + cita.Id);
+                    Console.WriteLine();
+
+                    foreach (Cliente cliente in clientes)
+                    {
+                        if (cliente.Id == cita.IdCliente)
+                        {
+                            Console.WriteLine("Cliente: " + cliente.Nombre);
+                            break;
+                        }
+                    }
+
+                    foreach (Barbero barbero in barberos)
+                    {
+                        if (barbero.Id == cita.IdBarbero)
+                        {
+                            Console.WriteLine("Barbero: " + barbero.Nombre);
+                            break;
+                        }
+                    }
+
+                    Console.WriteLine("Fecha: " + cita.Fecha);
+                    Console.WriteLine("Hora: " + cita.Hora);
+                    Console.WriteLine("Estado: " + cita.Estado);
+                    Console.WriteLine("____________________________");
+                    Console.WriteLine();
+                }
+            }
             break;
 
         case 0:

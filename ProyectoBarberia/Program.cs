@@ -3,6 +3,7 @@
 List<Cliente> clientes = new List<Cliente>();
 List<Barbero> barberos = new List<Barbero>();
 List<Cita> citas = new List<Cita>();
+List<ServicioRealizado> serviciosRealizados = new List<ServicioRealizado>();
 
 int opcion = 0;
 
@@ -24,6 +25,7 @@ do
     Console.WriteLine("8. Agendar cita");
     Console.WriteLine("9. Consultar citas");
     Console.WriteLine("10. Cancelar cita");
+    Console.WriteLine("11. Registrar servicio realizado");
     Console.WriteLine("0. Salir");
     Console.WriteLine();
     Console.Write("Seleccione una opcion: ");
@@ -626,6 +628,64 @@ do
             }
 
             break;
+
+
+        case 11:
+            Console.Clear();
+
+            Console.WriteLine("\tREGISTRAR SERVICIO REALIZADO");
+            Console.WriteLine();
+
+            Console.Write("Id de la cita: ");
+            int idCitaServicio = Convert.ToInt32(Console.ReadLine());
+
+            bool citaEncontradaServicioRealizado = false;
+            bool servicioRegistrado = false;
+
+            foreach (Cita cita in citas)
+            {
+                if (cita.Id == idCitaServicio)
+                {
+                    citaEncontrada = true;
+
+                    if (cita.Estado == "Pendiente")
+                    {
+                        Console.Write("Monto cobrado ($RD): ");
+                        decimal importe = Convert.ToDecimal(Console.ReadLine());
+
+                        if (importe > 0)
+                        {
+                            ServicioRealizado nuevoServicio = new ServicioRealizado();
+
+                            nuevoServicio.Id = serviciosRealizados.Count + 1;
+                            nuevoServicio.IdCita = cita.Id;
+                            nuevoServicio.Monto = importe;
+
+                            serviciosRealizados.Add(nuevoServicio);
+
+                            cita.Estado = "Atendida";
+
+                            servicioRegistrado = true;
+
+                            Console.WriteLine();
+                            Console.WriteLine("\tSERVICIO REGISTRADO!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("EL MONTO DEBE SER MAYOR A CERO!");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("LA CITA NO ESTA PENDIENTE!");
+                    }
+
+                    break;
+                }
+            }
+
+            break;
+
 
         case 0:
             Console.WriteLine("Saliendo del sistema");

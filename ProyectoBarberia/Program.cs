@@ -16,6 +16,7 @@ do
     Console.WriteLine("2. Ver clientes registrados");
     Console.WriteLine("3. Buscar cliente por Id");
     Console.WriteLine("4. Actualizar cliente");
+    Console.WriteLine("5. Eliminar cliente");
     Console.WriteLine("0. Salir");
     Console.WriteLine();
     Console.Write("Seleccione una opcion: ");
@@ -223,6 +224,58 @@ do
                 Console.WriteLine();
                 Console.WriteLine("\tCLIENTE NO ENCONTRADO!");
             }
+            break;
+
+        case 5:
+            Console.Clear();
+
+            Console.WriteLine("\tELIMINAR CLIENTE");
+            Console.WriteLine();
+
+            Console.Write("Ingrese el ID del cliente: ");
+            int idEliminar = Convert.ToInt32(Console.ReadLine());
+
+            bool clienteEliminado = false;
+
+            foreach (Cliente cliente in clientes)
+            {
+                if (cliente.Id == idEliminar)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Nombre: " + cliente.Nombre);
+                    Console.WriteLine("Telefono: " + cliente.Telefono);
+                    Console.WriteLine();
+
+                    Console.Write("Eliminar este cliente? (S/N): ");
+                    string confirmacion = Console.ReadLine();
+
+                    if (confirmacion == "S" || confirmacion == "s")
+                    {
+                        clientes.Remove(cliente);
+
+                        Console.WriteLine();
+                        Console.WriteLine("\tCLIENTE ELIMINADO!");
+
+                        clienteEliminado = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("ELIMINACION CANCELADA!");
+
+                        clienteEliminado = true;
+                    }
+
+                    if (clienteEliminado == false)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("\tCLIENTE NO ENCONTRADO!");
+                    }
+
+                    break;
+                }
+            }
+
             break;
 
         case 0:

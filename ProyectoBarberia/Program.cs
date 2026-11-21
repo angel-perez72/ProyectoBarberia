@@ -26,6 +26,7 @@ do
     Console.WriteLine("9. Consultar citas");
     Console.WriteLine("10. Cancelar cita");
     Console.WriteLine("11. Registrar servicio realizado");
+    Console.WriteLine("12. Calcular comision");
     Console.WriteLine("0. Salir");
     Console.WriteLine();
     Console.Write("Seleccione una opcion: ");
@@ -686,6 +687,55 @@ do
 
             break;
 
+        case 12:
+            Console.Clear();
+
+            Console.WriteLine("\tCALCULAR COMISION");
+            Console.WriteLine();
+
+            Console.Write("Ingrese el Id del barbero: ");
+            int idBarberoComision = Convert.ToInt32(Console.ReadLine());
+
+            bool barberoEncontradoParaComision = false;
+
+            foreach (Barbero barbero in barberos)
+            {
+                if (barbero.Id == idBarberoComision)
+                {
+                    barberoEncontradoParaComision = true;
+                    Console.WriteLine("Barbero: " + barbero.Nombre);
+                    break;
+                }
+            }
+
+            if (barberoEncontradoParaComision == false)
+            {
+                Console.WriteLine("BARBERO NO ENCONTRADO!");
+                break;
+            }
+
+            decimal totalServicios = 0;
+
+            foreach (ServicioRealizado servicio in serviciosRealizados)
+            {
+                foreach (Cita cita in citas)
+                {
+                    if (servicio.IdCita == cita.Id &&
+                        cita.IdBarbero == idBarberoComision)
+                    {
+                        totalServicios = totalServicios + servicio.Monto;
+                    }
+                }
+            }
+
+            decimal comision = totalServicios * 0.40m;
+
+            Console.WriteLine();
+            Console.WriteLine("Total de servicios:" + "RD$" + totalServicios);
+            Console.WriteLine("Porcentaje de comision (40%): ");
+            Console.WriteLine("Comision del barbero:" + "RD$" + comision);
+
+            break;
 
         case 0:
             Console.WriteLine("Saliendo del sistema");

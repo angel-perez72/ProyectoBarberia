@@ -1,6 +1,7 @@
 ﻿using ProyectoBarberia;
 
 List<Cliente> clientes = new List<Cliente>();
+List<Barbero> barberos = new List<Barbero>();
 
 int opcion = 0;
 
@@ -17,6 +18,7 @@ do
     Console.WriteLine("3. Buscar cliente por Id");
     Console.WriteLine("4. Actualizar cliente");
     Console.WriteLine("5. Eliminar cliente");
+    Console.WriteLine("6. Registrar barbero");
     Console.WriteLine("0. Salir");
     Console.WriteLine();
     Console.Write("Seleccione una opcion: ");
@@ -274,6 +276,78 @@ do
                 }
 
                 break;
+            }
+
+            break;
+
+        case 6:
+            Console.Clear();
+
+            Barbero nuevoBarbero = new Barbero();
+
+            Console.WriteLine("\tREGISTRAR BARBERO");
+            Console.WriteLine();
+
+            bool idBarberoValido = false;
+
+            do
+            {
+                Console.Write("Id: ");
+                string entradaIdBarbero = Console.ReadLine();
+                int numeroIdBarbero = 0;
+
+                if (int.TryParse(entradaIdBarbero, out numeroIdBarbero))
+                {
+                    if (numeroIdBarbero > 0)
+                    {
+                        nuevoBarbero.Id = numeroIdBarbero;
+                        idBarberoValido = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("EL ID DEBE SER MAYOR A CERO!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("EL ID DEBE SER UN NUMERO!");
+                }
+
+            } while (idBarberoValido == false);
+
+            bool existeBarbero = false;
+
+            foreach (Barbero barbero in barberos)
+            {
+                if (barbero.Id == nuevoBarbero.Id)
+                {
+                    existeBarbero = true;
+                }
+            }
+
+            if (existeBarbero == true)
+            {
+                Console.WriteLine();
+                Console.WriteLine("\tEXISTE UN BARBERO CON ESTE ID!");
+            }
+            else
+            {
+                do
+                {
+                    Console.Write("Nombre: ");
+                    nuevoBarbero.Nombre = Console.ReadLine();
+
+                    if (string.IsNullOrWhiteSpace(nuevoBarbero.Nombre))
+                    {
+                        Console.WriteLine("EL NOMBRE NO PUEDE ESTAR VACIO!");
+                    }
+
+                } while (string.IsNullOrWhiteSpace(nuevoBarbero.Nombre));
+
+                barberos.Add(nuevoBarbero);
+
+                Console.WriteLine();
+                Console.WriteLine("\tBARBERO REGISTRADO!");
             }
 
             break;

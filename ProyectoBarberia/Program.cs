@@ -23,6 +23,7 @@ do
     Console.WriteLine("7. Eliminar barbero");
     Console.WriteLine("8. Agendar cita");
     Console.WriteLine("9. Consultar citas");
+    Console.WriteLine("10. Cancelar cita");
     Console.WriteLine("0. Salir");
     Console.WriteLine();
     Console.Write("Seleccione una opcion: ");
@@ -565,6 +566,65 @@ do
                     Console.WriteLine();
                 }
             }
+            break;
+
+        case 10:
+            Console.Clear();
+
+            Console.WriteLine("\tCANCELAR CITA");
+            Console.WriteLine();
+
+            Console.Write("Id de la cita a cancelar: ");
+            int idCancelar = Convert.ToInt32(Console.ReadLine());
+
+            bool citaEncontrada = false;
+
+            foreach (Cita cita in citas)
+            {
+                if (cita.Id == idCancelar)
+                {
+                    citaEncontrada = true;
+
+                    Console.WriteLine();
+                    Console.WriteLine("Id de cita: " + cita.Id);
+                    Console.WriteLine("Fecha: " + cita.Fecha);
+                    Console.WriteLine("Hora: " + cita.Hora);
+                    Console.WriteLine("Estado: " + cita.Estado);
+                    Console.WriteLine();
+
+                    if (cita.Estado == "Cancelada")
+                    {
+                        Console.WriteLine("\tESTA CITA YA ESTA CANCELADA!");
+                    }
+                    else
+                    {
+                        Console.Write("Desea cancelar esta cita? (S/N): ");
+                        string confirmacionCita = Console.ReadLine();
+
+                        if (confirmacionCita == "S" || confirmacionCita == "s")
+                        {
+                            cita.Estado = "Cancelada";
+
+                            Console.WriteLine();
+                            Console.WriteLine("\tCITA CANCELADA!");
+                        }
+                        else
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("\tCANCELACION NO REALIZADA!");
+                        }
+                    }
+
+                    break;
+                }
+            }
+
+            if (citaEncontrada == false)
+            {
+                Console.WriteLine();
+                Console.WriteLine("\tCITA NO ENCONTRADA!");
+            }
+
             break;
 
         case 0:

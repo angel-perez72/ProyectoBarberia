@@ -4,8 +4,6 @@ List<Cliente> clientes = new List<Cliente>();
 List<Barbero> barberos = new List<Barbero>();
 List<Cita> citas = new List<Cita>();
 List<ServicioRealizado> serviciosRealizados = new List<ServicioRealizado>();
-Conexion.ProbarConexion();
-
 int opcion = 0;
 
 do

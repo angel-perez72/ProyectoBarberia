@@ -762,7 +762,6 @@ do
 
             break;
 
-
         case 0:
             Console.WriteLine("Saliendo del sistema...");
             break;

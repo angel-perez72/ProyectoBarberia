@@ -4,6 +4,13 @@ List<Cliente> clientes = new List<Cliente>();
 List<Barbero> barberos = new List<Barbero>();
 List<Cita> citas = new List<Cita>();
 List<ServicioRealizado> serviciosRealizados = new List<ServicioRealizado>();
+
+Archivos.CrearCarpeta();
+Archivos.CargarClientes(clientes);
+Archivos.CargarBarberos(barberos);
+Archivos.CargarCitas(citas);
+Archivos.CargarServicios(serviciosRealizados);
+
 int opcion = 0;
 
 do
@@ -115,6 +122,7 @@ do
                 nuevoCliente.Telefono = Console.ReadLine();
 
                 clientes.Add(nuevoCliente);
+                Archivos.GuardarClientes(clientes);
                 Console.WriteLine();
                 Console.WriteLine("\tCLIENTE REGISTRADO!");
             }
@@ -222,6 +230,7 @@ do
 
                     cliente.Nombre = nuevoNombre;
                     cliente.Telefono = nuevoTelefono;
+                    Archivos.GuardarClientes(clientes);
 
                     Console.WriteLine();
                     Console.WriteLine("\tCLIENTE ACTUALIZADO!");
@@ -262,6 +271,7 @@ do
                     if (confirmacion == "S" || confirmacion == "s")
                     {
                         clientes.Remove(cliente);
+                        Archivos.GuardarClientes(clientes);
 
                         Console.WriteLine();
                         Console.WriteLine("\tCLIENTE ELIMINADO!");
@@ -387,6 +397,7 @@ do
                     if (confirmacionBarbero == "S" || confirmacionBarbero == "s")
                     {
                         barberos.Remove(barbero);
+                        Archivos.GuardarBarberos(barberos);
 
                         Console.WriteLine();
                         Console.WriteLine("\tBARBERO ELIMINADO!");
@@ -519,6 +530,7 @@ do
                 nuevaCita.Estado = "Pendiente";
 
                 citas.Add(nuevaCita);
+                Archivos.GuardarCitas(citas);
 
                 Console.WriteLine();
                 Console.WriteLine("\tCITA AGENDADA CORRECTAMENTE!");
@@ -607,6 +619,7 @@ do
                         if (confirmacionCita == "S" || confirmacionCita == "s")
                         {
                             cita.Estado = "Cancelada";
+                            Archivos.GuardarCitas(citas);
 
                             Console.WriteLine();
                             Console.WriteLine("\tCITA CANCELADA!");
@@ -665,6 +678,8 @@ do
                             serviciosRealizados.Add(nuevoServicio);
 
                             cita.Estado = "Atendida";
+                            Archivos.GuardarServicios(serviciosRealizados);
+                            Archivos.GuardarCitas(citas);   
 
                             servicioRegistrado = true;
 
